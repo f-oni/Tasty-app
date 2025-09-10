@@ -1,0 +1,30 @@
+name: Bump version and tag
+
+on: 
+  push:
+    branches: [ main ]
+
+
+jobs:
+  
+  build:
+    name: Create Tag
+  
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+
+      - name: checkout code 
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: '0'
+      - name: Bump version and push tag
+        id: tag_action
+        uses: anothrNick/github-tag-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+    
+       
